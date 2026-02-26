@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sobre - Meu Portfólio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -25,12 +26,49 @@
     </nav>
 
     <section id="sobre" class="hidden">
-      <h2>Sobre Mim</h2>
-      <p>Escreva um resumo sobre você aqui.</p>
+      <div class="about-grid">
+        <!-- Coluna Esquerda: Bio e Detalhes -->
+        <div class="bio-column">
+          <h2>Sobre Mim</h2>
+          <div class="sobre-texto">
+            <p>
+              Dennis é estudante de Estatística na <strong>Universidade Federal Fluminense</strong>
+              (public university in brazil) e formado <strong>técnico em Desenvolvimento
+              de Sistemas</strong> pelo Colégio Pedro II. Possui sólida base em programação
+              (C, C#, Java, PHP), banco de dados e Engenharia de Software, com
+              perfil analítico e forte raciocínio lógico.
+            </p>
+            <p>
+              Tem grande interesse em <strong>Inteligência Artificial</strong>, interação e <strong>análise
+              de dados</strong> e desenvolvimento de soluções tecnológicas orientadas por
+              dados. Também possui experiência e eficiência em desenvolvimento
+              web, aplicando boas práticas de organização, desempenho e
+              usabilidade. Busca unir estatística, programação e IA para
+              transformar dados em decisões estratégicas, sempre com foco em
+              aprendizado contínuo e geração de valor no mercado.
+            </p>
+            <div class="personal-details">
+              <p><i class="fas fa-user"></i> <strong>Nome:</strong> Dennis Gonçalves Dias</p>
+              <p><i class="fas fa-envelope"></i> <strong>Email:</strong> <a href="mailto:dennis.gon.dias@gmail.com" class="email-link">dennis.gon.dias@gmail.com</a></p>
+              <p><i class="fas fa-map-marker-alt"></i> <strong>Residência:</strong> <a href="https://www.google.com/maps/search/?api=1&query=Rio+de+Janeiro%2C+Brasil" target="_blank" rel="noopener noreferrer" class="email-link">Rio de Janeiro, Brasil</a></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna Direita: Interesses -->
+        <div class="interests-column">
+          <h2>Áreas de Interesse</h2>
+          <div class="sobre-destaques">
+            <div class="destaque-card"><i class="fas fa-brain"></i><h3>Inteligência Artificial</h3><p>Transformando dados em decisões estratégicas.</p></div>
+            <div class="destaque-card"><i class="fas fa-chart-line"></i><h3>Análise de Dados</h3><p>Unindo estatística e programação para gerar insights.</p></div>
+            <div class="destaque-card"><i class="fas fa-code"></i><h3>Desenvolvimento Web</h3><p>Criando soluções com foco em usabilidade e desempenho.</p></div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <footer>
-      <p>&copy; 2026 [Seu Nome]. Todos os direitos reservados.</p>
+      <p>&copy; 2026 Dennis Dias. Todos os direitos reservados.</p>
     </footer>
     <script src="script.js"></script>
   </body>

@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meu Portfólio Acadêmico</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   </head>
   <body>
     <div class="transition-overlay" id="transition-overlay">
       <div class="loader"></div>
     </div>
+    <canvas id="tech-background"></canvas>
     <nav>
       <div class="logo">
         <img src="imagens/perfil.png" alt="Foto de Perfil" />
@@ -24,18 +26,23 @@
     </nav>
 
     <section id="home" class="hidden">
-      <h1>Dennis Dias</h1>
-      <div class="frase-carrossel">
-        <div class="palavras-container">
-          <span class="palavra">Desenvolvedor</span>
-          <span class="palavra">Estudante</span>
-          <span class="palavra">Estatístico</span>
+      <div class="tech-card">
+        <div class="home-icon">
+          <i class="fas fa-laptop-code"></i>
+        </div>
+        <h1>Dennis Dias</h1>
+        <div class="frase-carrossel">
+          <div class="palavras-container">
+            <span class="palavra">Desenvolvedor</span>
+            <span class="palavra">Estudante</span>
+            <span class="palavra">Estatístico</span>
+          </div>
         </div>
       </div>
     </section>
 
     <footer>
-      <p>&copy; 2026 [Seu Nome]. Todos os direitos reservados.</p>
+      <p>&copy; 2026 Dennis Dias. Todos os direitos reservados.</p>
     </footer>
 
     <script src="script.js"></script>
