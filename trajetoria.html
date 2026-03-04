@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trajetória - Meu Portfólio</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   </head>
   <body>
     <div class="transition-overlay" id="transition-overlay">
@@ -24,31 +25,111 @@
     </nav>
 
     <section id="trajetoria" class="hidden">
-      <h2>Minha Trajetória Acadêmica</h2>
-      <div class="timeline">
-        <div class="timeline-item">
-          <h3>Doutorado em [Área]</h3>
-          <p>
-            Universidade X (2022 - Presente) | Pesquisa focada em inovação e
-            desenvolvimento.
-          </p>
+      <div class="trajectory-grid">
+        
+        <!-- Coluna 1: Trajetória Acadêmica -->
+        <div class="trajectory-column">
+          <h2>Trajetória Acadêmica</h2>
+          <div class="timeline">
+            
+            <!-- Item 1: UFF -->
+            <div class="timeline-item">
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <img src="imagens/logo_uff.png" alt="Brasão UFF" class="timeline-header-logo" />
+                  <span class="date">Cursando</span>
+                </div>
+                <h3>Graduação em Estatística</h3>
+                <h4>Universidade Federal Fluminense (UFF)</h4>
+                <p>
+                  Foco acadêmico em Inteligência Artificial, Modelagem Preditiva e Inferência Estatística.
+                  Desenvolvimento de base matemática robusta para análise de dados complexos.
+                </p>
+                <div class="tags-container">
+                  <span class="tag tag-blue">IA</span>
+                  <span class="tag tag-blue">Modelagem Preditiva</span>
+                  <span class="tag tag-blue">Inferência</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 2: Pedro II -->
+            <div class="timeline-item">
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <img src="imagens/brasão_cp2.png" alt="Brasão Colégio Pedro II" class="timeline-header-logo" />
+                  <span class="date">Concluído</span>
+                </div>
+                <h3>Técnico em Desenvolvimento de Sistemas</h3>
+                <h4>Colégio Pedro II</h4>
+                <p>
+                  Formação técnica com base sólida em Engenharia de Software, Algoritmos e Banco de Dados.
+                  Experiência prática em desenvolvimento full-stack.
+                </p>
+                <div class="tags-container">
+                  <span class="tag tag-gray">Desenvolvimento Web</span>
+                  <span class="tag tag-gray">C#</span>
+                  <span class="tag tag-gray">PHP</span>
+                  <span class="tag tag-gray">Eng. Software</span>
+                  <span class="tag tag-gray">MySQL</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
-        <div class="timeline-item">
-          <h3>Mestrado em [Área]</h3>
-          <p>Universidade Y (2019 - 2021) | Dissertação aprovada com louvor.</p>
+
+        <!-- Coluna 2: Projetos Acadêmicos -->
+        <div class="trajectory-column">
+          <h2>Projetos Acadêmicos</h2>
+          <div class="timeline">
+            
+            <!-- Item 3: Iniciação Científica -->
+            <div class="timeline-item">
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <img src="imagens/brasão_cp2.png" alt="Brasão Colégio Pedro II" class="timeline-header-logo" />
+                  <span class="date">Iniciação Científica</span>
+                </div>
+                <h3>Voluntário em Iniciação Científica</h3>
+                <h4>Colégio Pedro II</h4>
+                <p>
+                  Atuação no mapeamento de afinidades e pretensões pós-ensino médio dos alunos. Responsável pela coleta de dados e construção de um grafo de relacionamentos para análise.
+                </p>
+                <div class="tags-container">
+                  <span class="tag tag-gray">Ciência de Dados</span>
+                  <span class="tag tag-gray">Grafos</span>
+                  <span class="tag tag-gray">Pesquisa</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 4: Bolsista Musical -->
+            <div class="timeline-item">
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <img src="imagens/brasão_cp2.png" alt="Brasão Colégio Pedro II" class="timeline-header-logo" />
+                  <span class="date">Bolsista</span>
+                </div>
+                <h3>Bolsista de Música</h3>
+                <h4>Colégio Pedro II</h4>
+                <p>
+                  Participação em projetos musicais atuando na coordenação de grupos e auxílio técnico aos alunos para aprimoramento de performance vocal.
+                </p>
+                <div class="tags-container">
+                  <span class="tag tag-gray">Música</span>
+                  <span class="tag tag-gray">Liderança</span>
+                  <span class="tag tag-gray">Coordenação</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
-        <div class="timeline-item">
-          <h3>Graduação em [Área]</h3>
-          <p>
-            Universidade Z (2015 - 2019) | Iniciação científica e intercâmbio.
-          </p>
-        </div>
+
       </div>
     </section>
 
-    <footer>
-      <p>&copy; 2026 [Seu Nome]. Todos os direitos reservados.</p>
-    </footer>
     <script src="script.js"></script>
   </body>
 </html>

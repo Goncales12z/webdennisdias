@@ -22,7 +22,8 @@ body {
     radial-gradient(at 50% 50%, #ffffff 0px, transparent 60%), /* Luz Central Suave */
     radial-gradient(at 0% 100%, rgba(44, 62, 80, 0.08) 0px, transparent 50%), /* Escuro Base Esq */
     radial-gradient(at 100% 100%, rgba(52, 152, 219, 0.15) 0px, transparent 50%); /* Azul Accent Base Dir */
-  min-height: 100vh; /* Garante que o gradiente cubra a tela toda */
+  height: 100vh; /* Fixa a altura na tela */
+  overflow: hidden; /* Remove o scroll globalmente */
   color: var(--text-color);
 }
 
@@ -85,7 +86,7 @@ nav p {
 
 /* Seções */
 section {
-  min-height: 100vh;
+  height: 100vh; /* Garante que a seção ocupe exatamente a tela */
   padding: 50px;
   margin-left: 250px;
   display: flex;
@@ -138,24 +139,114 @@ p {
 
 /* Linha do Tempo (Trajetória) */
 .timeline {
-  border-left: 4px solid var(--accent-color);
-  padding-left: 20px;
-  text-align: left;
-  max-width: 800px;
-}
-.timeline-item {
-  margin-bottom: 30px;
   position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px 0;
+  border-left: 4px solid rgba(52, 152, 219, 0.3); /* Linha mais sutil */
 }
+
+.timeline-item {
+  margin-bottom: 40px;
+  position: relative;
+  padding-left: 40px; /* Espaço para a linha e o ponto */
+  width: 100%;
+}
+
+/* O Ponto da Timeline */
 .timeline-item::before {
   content: "";
   position: absolute;
-  left: -32px;
-  top: 5px;
-  width: 16px;
-  height: 16px;
+  left: -10px; /* Centraliza na linha (linha tem 4px, ponto tem 20px -> -10 + 2 = centro) */
+  top: 20px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background-color: var(--accent-color);
+  border: 4px solid #fff; /* Efeito de anel */
+  box-shadow: 0 0 0 2px var(--accent-color); /* Borda externa */
+  z-index: 1;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.timeline-item:hover::before {
+  background-color: #fff;
+  transform: scale(1.2);
+}
+
+/* Card da Timeline */
+.timeline-content {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid transparent; /* Prepara para o hover */
+  transition: all 0.3s ease;
+  text-align: left;
+  position: relative; /* Contexto para o logo */
+}
+
+.timeline-content:hover {
+  transform: translateX(10px);
+  box-shadow: 0 8px 25px rgba(52, 152, 219, 0.15);
+  border-left: 4px solid var(--accent-color);
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.timeline-header-logo {
+  height: 45px; /* Tamanho ideal para o cabeçalho */
+  width: auto;
+  object-fit: contain;
+}
+
+.timeline-content h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--primary-color);
+}
+
+.timeline-content h4 {
+  margin: 5px 0 15px 0;
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  font-weight: 600;
+}
+
+/* Tags de Competência */
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.tag {
+  font-size: 0.85rem;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.tag-blue {
+  background-color: rgba(52, 152, 219, 0.1);
+  color: var(--accent-color);
+}
+
+.tag-gray {
+  background-color: #ecf0f1;
+  color: #7f8c8d;
+}
+
+.tag-outline {
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  background: transparent;
 }
 
 /* Grid de Habilidades */
@@ -189,21 +280,39 @@ p {
 }
 footer {
   text-align: center;
-  padding: 20px;
+  padding: 10px;
   background: var(--primary-color);
   color: white;
-  margin-left: 250px;
+  position: fixed; /* Fixa o rodapé em todas as páginas */
+  bottom: 0;
+  left: 250px;
+  right: 0;
+  z-index: 100;
 }
 
 /* Classes de Animação de Interatividade (Scroll) */
 .hidden {
   opacity: 0;
-  transform: translateY(30px); /* Começa um pouco abaixo */
+  /* transform: translateY(30px);  Removido para usar animações específicas abaixo */
   transition: all 1s ease-out;
 }
+
+/* Animação Padrão (para seções gerais) */
+.hidden:not(.timeline-item) {
+  transform: translateY(30px);
+}
+
+/* Animação Alternada para Timeline (Slide-in Lateral) */
+.timeline-item.hidden:nth-child(odd) {
+  transform: translateX(-50px); /* Vem da esquerda */
+}
+.timeline-item.hidden:nth-child(even) {
+  transform: translateX(50px); /* Vem da direita */
+}
+
 .show {
   opacity: 1;
-  transform: translateY(0); /* Sobe para a posição original */
+  transform: translate(0, 0); /* Reseta qualquer transform */
 }
 
 /* Camada que cobre a tela inteira */
@@ -438,6 +547,40 @@ body.fade-in {
   margin-bottom: 10px;
 }
 
+/* Grid de Projetos (Nova Seção) */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.project-card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(52, 152, 219, 0.2);
+  border-color: var(--accent-color);
+}
+
+.project-icon {
+  font-size: 2rem;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+}
+
 /* Fundo Animado (Canvas) */
 #tech-background {
   position: fixed;
@@ -453,5 +596,80 @@ body.fade-in {
   .about-grid {
     grid-template-columns: 1fr; /* Volta para uma coluna em telas menores */
     gap: 40px;
+  }
+}
+
+/* Compactar a timeline para caber na altura da tela (100vh) */
+#trajetoria {
+  height: 100vh;
+  padding: 20px 40px;
+  justify-content: center; /* Centraliza verticalmente */
+  overflow: hidden; /* Remove o scroll */
+  align-items: center;
+}
+
+.trajectory-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  width: 100%;
+  max-width: 1400px;
+  align-items: start;
+  position: relative;
+}
+
+/* Divisória Vertical Central */
+.trajectory-grid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(44, 62, 80, 0.35), /* Cor do ponto (var(--primary-color) com alpha) */
+    rgba(44, 62, 80, 0.35) 3px, /* Tamanho do ponto */
+    transparent 3px, /* Início do espaço */
+    transparent 9px /* Fim do espaço (espaçamento de 6px) */
+  );
+}
+
+.trajectory-column h2 {
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  text-align: left;
+  padding-left: 10px;
+  color: var(--primary-color);
+}
+
+#trajetoria .timeline-item {
+  margin-bottom: 20px;
+}
+
+#trajetoria .timeline {
+  max-width: none; /* Permite que a timeline ocupe a coluna */
+  margin: 0;
+}
+
+#trajetoria .timeline-content {
+  padding: 20px;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 1100px) {
+  .trajectory-grid {
+    grid-template-columns: 1fr;
+  }
+  .trajectory-grid::before {
+    display: none;
+  }
+  #trajetoria {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+    justify-content: flex-start;
+    padding-top: 40px;
   }
 }
