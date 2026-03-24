@@ -70,6 +70,12 @@ if (canvas) {
   const ctx = canvas.getContext("2d");
   let particlesArray;
 
+  // Verifica se estamos na página de Eficiências (procura pela seção específica)
+  const isEficiencias = document.getElementById("eficiencias") !== null;
+
+  // Caracteres que representam Dados e Estatística
+  const dataSymbols = "010101∑∫πμσΔΩx̄%";
+
   // Ajusta o tamanho do canvas para a janela inteira
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -95,17 +101,29 @@ if (canvas) {
       this.directionY = directionY;
       this.size = size;
       this.color = color;
+      // Atribui um símbolo aleatório a esta partícula
+      if (isEficiencias) {
+        this.text = dataSymbols.charAt(Math.floor(Math.random() * dataSymbols.length));
+      }
     }
 
-    // Desenha a partícula (ponto)
+    // Desenha a partícula
     draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-      ctx.fillStyle = this.color;
-      ctx.fill();
+      if (isEficiencias) {
+        // Modo Data Science (Símbolos)
+        ctx.font = "bold " + (this.size * 3 + 8) + "px Consolas, monospace";
+        ctx.fillStyle = this.color;
+        ctx.fillText(this.text, this.x, this.y);
+      } else {
+        // Modo Padrão (Bolinhas)
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
     }
 
-    // Atualiza a posição e verifica colisão com bordas
+    
     update() {
       if (this.x > canvas.width || this.x < 0) {
         this.directionX = -this.directionX;
@@ -119,17 +137,25 @@ if (canvas) {
     }
   }
 
-  // Inicializa as partículas
+  
   function init() {
     particlesArray = [];
-    let numberOfParticles = (canvas.height * canvas.width) / 9000; // Densidade
+    // Se for eficiencias usa menos particulas (10000), se for normal usa mais (9000)
+    let divider = isEficiencias ? 10000 : 9000;
+    let numberOfParticles = (canvas.height * canvas.width) / divider;
+    
     for (let i = 0; i < numberOfParticles; i++) {
       let size = Math.random() * 3 + 1;
       let x = Math.random() * (innerWidth - size * 2 - size * 2) + size * 2;
       let y = Math.random() * (innerHeight - size * 2 - size * 2) + size * 2;
       let directionX = Math.random() * 2 - 1;
       let directionY = Math.random() * 2 - 1;
-      let color = "#2c3e50"; // Cor primária (escuro)
+      let color = "#2c3e50"; // Cor padrão (Cinza Escuro)
+      
+      // Se for a página de dados, usa a cor Accent (Azul) para os símbolos também
+      if (isEficiencias) {
+        color = "#3498db";
+      }
 
       particlesArray.push(
         new Particle(x, y, directionX, directionY, size, color),
@@ -137,7 +163,7 @@ if (canvas) {
     }
   }
 
-  // Animação Loop
+
   function animate() {
     requestAnimationFrame(animate);
     ctx.clearRect(0, 0, innerWidth, innerHeight);
@@ -157,7 +183,7 @@ if (canvas) {
       let distance = dx * dx + dy * dy;
 
       if (distance < 25000) { // Distância para conectar ao mouse
-        ctx.strokeStyle = "rgba(52, 152, 219, 0.4)"; // Azul (Accent)
+        ctx.strokeStyle = "rgba(52, 152, 219, 0.5)"; // Azul (Accent)
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -172,8 +198,14 @@ if (canvas) {
         let distance2 = dx2 * dx2 + dy2 * dy2;
 
         if (distance2 < (canvas.width / 7) * (canvas.height / 7)) {
-          let opacityValue = 1 - distance2 / 20000;
-          ctx.strokeStyle = "rgba(44, 62, 80," + opacityValue + ")"; // Primária com opacidade
+          let opacityValue = 1 - distance2 / 18000; // Ajuste fino da opacidade da linha
+          
+          if (isEficiencias) {
+            ctx.strokeStyle = "rgba(52, 152, 219," + opacityValue + ")"; // Azul Tech (Dados)
+          } else {
+            ctx.strokeStyle = "rgba(44, 62, 80," + opacityValue + ")"; // Cinza Padrão (Molecular)
+          }
+
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(particlesArray[a].x, particlesArray[a].y);

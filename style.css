@@ -618,7 +618,7 @@ body.fade-in {
   position: relative;
 }
 
-/* Divisória Vertical Central */
+
 .trajectory-grid::before {
   content: "";
   position: absolute;
@@ -629,10 +629,10 @@ body.fade-in {
   transform: translateX(-50%);
   background-image: repeating-linear-gradient(
     to bottom,
-    rgba(44, 62, 80, 0.35), /* Cor do ponto (var(--primary-color) com alpha) */
-    rgba(44, 62, 80, 0.35) 3px, /* Tamanho do ponto */
-    transparent 3px, /* Início do espaço */
-    transparent 9px /* Fim do espaço (espaçamento de 6px) */
+    rgba(44, 62, 80, 0.35), 
+    rgba(44, 62, 80, 0.35) 3px,
+    transparent 3px, 
+    transparent 9px 
   );
 }
 
@@ -649,8 +649,7 @@ body.fade-in {
 }
 
 #trajetoria .timeline {
-  max-width: none; /* Permite que a timeline ocupe a coluna */
-  margin: 0;
+  max-width: none; 
 }
 
 #trajetoria .timeline-content {
@@ -672,4 +671,196 @@ body.fade-in {
     justify-content: flex-start;
     padding-top: 40px;
   }
+}
+
+/* --- PÁGINA DE EFICIÊNCIAS (DASHBOARD STYLE) --- */
+
+.dashboard-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.mono-text {
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 0.9rem;
+  color: var(--accent-color);
+  letter-spacing: 1px;
+  opacity: 0.8;
+  margin-top: 5px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Padrão Mobile: 1 coluna */
+  gap: 25px;
+  width: 100%;
+  max-width: 1200px;
+  align-items: start;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 25px;
+  border: 1px solid rgba(52, 152, 219, 0.15);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efeito "Tech" Borda Lateral */
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--accent-color);
+  opacity: 0.6;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(44, 62, 80, 0.1);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  padding-bottom: 10px;
+}
+
+.card-header i {
+  font-size: 1.2rem;
+  color: var(--accent-color);
+}
+
+.card-header h3 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: var(--primary-color);
+}
+
+/* Gráficos de Barra */
+.bar-group {
+  margin-bottom: 15px;
+}
+.bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.percent {
+  font-family: 'Consolas', monospace;
+  color: var(--accent-color);
+}
+.progress-bg {
+  background: rgba(0,0,0,0.05);
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-fill {
+  background: linear-gradient(90deg, var(--accent-color), #2980b9);
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s ease-out;
+}
+
+/* Tags de Dados */
+.tags-matrix {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.data-tag {
+  background: rgba(52, 152, 219, 0.08);
+  color: var(--primary-color);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(52, 152, 219, 0.2);
+  font-family: 'Consolas', monospace; /* Fonte tech */
+}
+
+/* Grid de Ferramentas */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+.tool-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+.tool-item:hover {
+  background: #f0f4f8;
+}
+.tool-item i {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+  color: var(--primary-color);
+}
+
+/* Círculos Métricos Simples */
+.metrics-row {
+  display: flex;
+  justify-content: space-around;
+}
+.metric-circle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.circle-value {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 3px solid var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--accent-color);
+  font-family: 'Consolas', monospace;
+  background: rgba(255,255,255,0.5);
+}
+
+/* Configuração Desktop: 2 Colunas Fixas */
+@media (min-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr 1fr; /* Garante 2 colunas exatas */
+  }
+  .large-card {
+    grid-column: span 2; /* Ocupa a linha inteira */
+  }
+}
+
+/* --- CORREÇÃO DE LAYOUT: EFICIÊNCIAS --- */
+/* Garante que o conteúdo não seja cortado e tenha espaço para respirar */
+#eficiencias {
+  display: block; /* Remove o flex center que trava o conteúdo no meio */
+  overflow-y: auto; /* Permite rolar se a tela for pequena */
+  height: 100vh;
+  padding: 60px 40px; /* Mais espaço no topo e laterais */
+}
+
+#eficiencias .dashboard-grid {
+  margin: 0 auto; /* Centraliza o grid na tela */
+  padding-bottom: 40px; /* Espaço extra no final para não cortar o último card */
 }
