@@ -819,7 +819,9 @@ body.fade-in {
 /* Círculos Métricos Simples */
 .metrics-row {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
+  row-gap: 20px;
 }
 .metric-circle {
   display: flex;
