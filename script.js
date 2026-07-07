@@ -1,3 +1,14 @@
+// 0. Carrega a navegação (sidebar.html) de forma dinâmica em todas as páginas
+fetch("sidebar.html")
+  .then((res) => res.text())
+  .then((html) => {
+    const placeholder = document.getElementById("nav-placeholder");
+    if (placeholder) {
+      placeholder.outerHTML = html;
+    }
+  })
+  .catch((err) => console.error("Erro ao carregar sidebar.html:", err));
+
 // 1. Navegação Suave (Smooth Scroll)
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
@@ -36,31 +47,33 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.add("fade-in");
   });
 
-  // 2. Captura todos os links internos para criar a transição de saída
-  const links = document.querySelectorAll("a");
+  // 2. Captura cliques em links internos para criar a transição de saída.
+  // Usa delegação de evento no document (em vez de listener por link) porque
+  // a nav (sidebar.html) é injetada depois via fetch, então os links do menu
+  // ainda não existem no DOM neste ponto do DOMContentLoaded.
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest("a");
+    if (!link) return;
 
-  links.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      const href = link.getAttribute("href");
+    const href = link.getAttribute("href");
 
-      // Verifica se é um link interno (não começa com http nem é um ID #)
-      if (
-        href &&
-        !href.startsWith("http") &&
-        !href.startsWith("#") &&
-        !link.target
-      ) {
-        e.preventDefault(); // Para o carregamento imediato
+    // Verifica se é um link interno (não começa com http nem é um ID #)
+    if (
+      href &&
+      !href.startsWith("http") &&
+      !href.startsWith("#") &&
+      !link.target
+    ) {
+      e.preventDefault(); // Para o carregamento imediato
 
-        overlay.classList.remove("loaded");
-        overlay.classList.add("leaving");
+      overlay.classList.remove("loaded");
+      overlay.classList.add("leaving");
 
-        // Espera a animação da cortina terminar (0.6s) para mudar de página
-        setTimeout(() => {
-          window.location.href = href;
-        }, 600);
-      }
-    });
+      // Espera a animação da cortina terminar (0.6s) para mudar de página
+      setTimeout(() => {
+        window.location.href = href;
+      }, 600);
+    }
   });
 });
 
