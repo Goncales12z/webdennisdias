@@ -57,11 +57,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const href = link.getAttribute("href");
 
-    // Verifica se é um link interno (não começa com http nem é um ID #)
+    // Verifica se é um link interno de navegação real:
+    // não é âncora (#), não é externo (http), e não abre outro protocolo
+    // (mailto:, tel:, etc.), que não disparam um carregamento de página.
     if (
       href &&
       !href.startsWith("http") &&
       !href.startsWith("#") &&
+      !href.startsWith("mailto:") &&
+      !href.startsWith("tel:") &&
       !link.target
     ) {
       e.preventDefault(); // Para o carregamento imediato
