@@ -278,6 +278,42 @@ p {
   flex-wrap: wrap;
   justify-content: center;
 }
+
+/* Formulário de Contato */
+.contact-form {
+  max-width: 500px;
+  margin: 30px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.contact-form input,
+.contact-form textarea {
+  padding: 12px 15px;
+  border: 2px solid var(--accent-color);
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--text-color);
+  resize: vertical;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent-color);
+}
+.contact-form button {
+  align-self: center;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+#form-status {
+  text-align: center;
+  font-weight: bold;
+  color: var(--primary-color);
+}
 footer {
   text-align: center;
   padding: 10px;
